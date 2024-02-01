@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { VersioningType } from '@nestjs/common';
 import swaggerConfig from './configs/swagger.config';
 
 async function bootstrap() {
@@ -12,6 +13,12 @@ async function bootstrap() {
     credentials: true,
   });
   */
+
+  app.enableVersioning({
+    type: VersioningType.URI,
+    prefix: 'v',
+    defaultVersion: '1',
+  });
 
   await swaggerConfig(app);
 
